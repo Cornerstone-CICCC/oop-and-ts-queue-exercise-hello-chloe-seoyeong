@@ -19,7 +19,7 @@ function processReturns(queue) {
         totalLateFee += bookReader.books[i].daysLate * 2;
       }
     }
-    if(totalLateFee >= 10) {
+    if(totalLateFee > 0) {
       tempQueue.enqueue(bookReader)
     }
   }
