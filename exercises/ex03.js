@@ -8,6 +8,25 @@ const Queue = require('../lib/Queue')
 
 function processReturns(queue) {
   // your code here
+  let tempQueue = new Queue();
+
+  while(!queue.isEmpty()) {
+    let bookReader = queue.dequeue();
+    let totalLateFee = 0;
+
+    for(let i = 0; i < bookReader.books.length; i++) {
+      if(bookReader.books[i].daysLate !== 0) {
+        totalLateFee += bookReader.books[i].daysLate * 2;
+      }
+    }
+    if(totalLateFee >= 10) {
+      tempQueue.enqueue(bookReader)
+    }
+  }
+
+  while(!tempQueue.isEmpty()) {
+    queue.enqueue(tempQueue.dequeue())
+  }
 }
 
 const returns = new Queue();
